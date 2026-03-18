@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="index.css">
     <title>Document</title>
-    <script src="./script.js"></script>
+    <script src="./script.js" defer></script>
 </head>
 <body>
     <form id="cadastroForm" >
@@ -22,7 +22,10 @@
         </div>
         <div class="form-group">
             <label for="senha">Senha *</label>
-            <input type="password" id="senha" name="senha" required minlength="8">
+            <input type="password" id="senha" name="senha" required>
+            <div class="strength-meter">
+                <div id="strength-bar" class="strength-bar"></div>
+            </div>
             <span class="error-msg" id="senha-error"></span>
         </div>
         <button type="submit">Criar Conta</button>

@@ -32,8 +32,30 @@ if (!regex.test(valor)) return { valido: false, mensagem: '⚠️ Formato invál
 return { valido: true };
 }
 function validarSenha(valor) {
-if (valor.length < 8) return { valido: false, mensagem: '⚠️ Mínimo 8 caracteres' };
+    const bar = document.getElementById('strength-bar');
+    let forca = 0;
+
+    // Critérios
+    if (valor.length >= 8) forca++;
+    if (/[A-Z]/.test(valor)) forca++;
+    if (/[0-9]/.test(valor)) forca++;
+    if (/[^A-Za-z0-9]/.test(valor)) forca++; // Caractere especial
+
+    // Atualiza a interface visual da barra
+    bar.className = 'strength-bar'; // Limpa classes anteriores
+    
+    if (valor.length > 0) {
+        if (forca === 1) bar.classList.add('fraca');
+        else if (forca === 2) bar.classList.add('razoavel');
+        else if (forca === 3) bar.classList.add('boa');
+        else if (forca === 4) bar.classList.add('forte');
+    }
+
+    // Retorno para a função validarCampo original
+    if (valor.length < 8) return { valido: false, mensagem: '⚠️ Mínimo 8 caracteres' };
     if (!/[A-Z]/.test(valor)) return { valido: false, mensagem: '⚠️ Precisa de 1 letra maiúscula' };
     if (!/[0-9]/.test(valor)) return { valido: false, mensagem: '⚠️ Precisa de 1 número' };
-return { valido: true };
+    if (!/[^A-Za-z0-9]/.test(valor)) return { valido: false, mensagem: '⚠️ Precisa de 1 caractere especial' };
+
+    return { valido: true };
 }
